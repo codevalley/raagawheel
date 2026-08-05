@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Anek_Latin, Eczar } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SoundBar } from "@/components/audio/SoundBar";
 import "./globals.css";
 
 const eczar = Eczar({
@@ -35,9 +36,10 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${eczar.variable} ${anek.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans">
+      <body className="flex min-h-full flex-col pb-12 font-sans">
         <SiteHeader />
         <main className="flex-1">{children}</main>
+        <SoundBar />
       </body>
     </html>
   );

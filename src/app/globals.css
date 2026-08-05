@@ -150,6 +150,34 @@ a {
   transform: translateY(4px);
 }
 
+/* Hub drone rings — breathing at tanpura pace. */
+@keyframes hub-breathe {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.hub-pulse {
+  transform-origin: 360px 360px;
+  animation: hub-breathe 4s ease-out infinite;
+}
+.hub-pulse-2 {
+  animation-delay: 2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-pulse,
+  .hub-pulse-2 {
+    animation: none;
+    opacity: 0.35;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

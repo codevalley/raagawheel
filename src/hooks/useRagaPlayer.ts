@@ -18,6 +18,7 @@ const SERVER_STATE: EngineState = {
   tuning: "ji",
   timbre: "veena",
   droneOn: false,
+  bpm: 84,
 };
 
 export const tokensToNotes = (tokens: readonly SwaraToken[]): NoteSpec[] =>
@@ -39,12 +40,12 @@ export function useRagaPlayer() {
     [],
   );
 
-  async function playSequence(track: string, notes: NoteSpec[], bpm: number): Promise<void> {
+  async function playSequence(track: string, notes: NoteSpec[], bpm?: number): Promise<void> {
     handleRef.current?.stop();
     setActiveTrack(track);
     setActiveIndex(null);
     handleRef.current = await engine.playScale(notes, {
-      bpm,
+      bpm: bpm ?? engine.getState().bpm,
       onNote: (i) => setActiveIndex(i),
       onDone: () => {
         setActiveIndex(null);
@@ -73,6 +74,7 @@ export function useRagaPlayer() {
     tapSwara,
     toggleDrone: () => void engine.toggleDrone(),
     setShruti: (hz: number) => engine.setShruti(hz),
+    setBpm: (bpm: number) => engine.setBpm(bpm),
     setTuningSystem: (t: TuningSystem) => engine.setTuningSystem(t),
     setTimbre: (t: Timbre) => engine.setTimbre(t),
   };

@@ -25,12 +25,21 @@ export interface PlaybackHandle {
 
 export type Timbre = "veena" | "flute";
 
+/** Tempo presets in Carnatic terms. */
+export const TEMPO_PRESETS = [
+  { key: "chauka", label: "Chauka", hint: "slow", bpm: 52 },
+  { key: "madhyama", label: "Madhyama", hint: "medium", bpm: 84 },
+  { key: "durita", label: "Durita", hint: "brisk", bpm: 126 },
+] as const;
+export type TempoKey = (typeof TEMPO_PRESETS)[number]["key"];
+
 export interface EngineState {
   isReady: boolean;
   shrutiHz: number;
   tuning: TuningSystem;
   timbre: Timbre;
   droneOn: boolean;
+  bpm: number;
 }
 
 export interface PlayScaleOptions {

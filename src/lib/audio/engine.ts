@@ -44,6 +44,8 @@ class RagaAudioEngine {
     tuning: "ji",
     timbre: "veena",
     droneOn: false,
+    bpm: 84,
+    ...restoreSettings(),
   };
 
   // ── state pub/sub (for useSyncExternalStore) ──────────────────────────
@@ -58,6 +60,7 @@ class RagaAudioEngine {
   private setState(patch: Partial<EngineState>): void {
     this.state = { ...this.state, ...patch };
     for (const fn of this.listeners) fn();
+    persistSettings(this.state);
   }
 
   // ── lifecycle ─────────────────────────────────────────────────────────
@@ -183,6 +186,10 @@ class RagaAudioEngine {
     this.setState({ tuning });
   }
 
+  setBpm(bpm: number): void {
+    this.setState({ bpm });
+  }
+
   setTimbre(timbre: Timbre): void {
     if (timbre === this.state.timbre) return;
     this.setState({ timbre });
@@ -191,6 +198,37 @@ class RagaAudioEngine {
       this.voice?.dispose();
       this.voice = createVoice(this.Tone, timbre, this.master);
     }
+  }
+}
+
+const SETTINGS_KEY = "ragawheel-audio";
+type PersistedSettings = Pick<EngineState, "shrutiHz" | "tuning" | "timbre" | "bpm">;
+
+function restoreSettings(): Partial<PersistedSettings> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = window.localStorage.getItem(SETTINGS_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as Partial<PersistedSettings>;
+    const out: Partial<PersistedSettings> = {};
+    if (typeof parsed.shrutiHz === "number" && parsed.shrutiHz > 60 && parsed.shrutiHz < 500)
+      out.shrutiHz = parsed.shrutiHz;
+    if (parsed.tuning === "ji" || parsed.tuning === "12tet") out.tuning = parsed.tuning;
+    if (parsed.timbre === "veena" || parsed.timbre === "flute") out.timbre = parsed.timbre;
+    if (typeof parsed.bpm === "number" && parsed.bpm >= 30 && parsed.bpm <= 240) out.bpm = parsed.bpm;
+    return out;
+  } catch {
+    return {};
+  }
+}
+
+function persistSettings(s: EngineState): void {
+  if (typeof window === "undefined") return;
+  try {
+    const { shrutiHz, tuning, timbre, bpm } = s;
+    window.localStorage.setItem(SETTINGS_KEY, JSON.stringify({ shrutiHz, tuning, timbre, bpm }));
+  } catch {
+    // Private-mode storage failures are non-fatal; settings just won't stick.
   }
 }
 
