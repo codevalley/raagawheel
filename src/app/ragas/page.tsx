@@ -5,6 +5,7 @@ import { CHAKRAS } from "@/lib/carnatic/mela";
 import { melaColorVar } from "@/lib/carnatic/color";
 import type { JanyaRaga, MelakartaRaga } from "@/lib/carnatic/types";
 import { SwaraGlyph } from "@/components/swara/SwaraGlyph";
+import { RagaSeal } from "@/components/raga/RagaSeal";
 
 export const metadata: Metadata = {
   title: "All ragas",
@@ -30,13 +31,14 @@ function MelaRow({ mela }: { mela: MelakartaRaga }) {
         className="group flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-hairline py-2.5 transition-colors hover:bg-rosewood"
       >
         <span className="display w-8 text-right text-lg text-ivory-mut">{mela.melaNumber}</span>
-        <span
-          aria-hidden
-          className="inline-block h-2.5 w-2.5 shrink-0 self-center rounded-full"
-          style={{ background: melaColorVar(mela.melaNumber) }}
+        <RagaSeal
+          swaras={mela.swarasUsed}
+          color={melaColorVar(mela.melaNumber)}
+          size={26}
+          className="shrink-0 self-center"
         />
         <span className="display text-lg transition-colors group-hover:text-zari-hi">
-          {mela.name}
+          {mela.displayName}
         </span>
         <span className="ml-auto">
           <ScaleTokens raga={mela} />
@@ -53,13 +55,15 @@ function JanyaRow({ janya }: { janya: JanyaRaga }) {
         href={`/raga/${janya.slug}`}
         className="group flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-hairline py-2.5 transition-colors hover:bg-rosewood"
       >
-        <span
-          aria-hidden
-          className="inline-block h-2.5 w-2.5 shrink-0 self-center rounded-full"
-          style={{ background: melaColorVar(janya.parentMelaNumber), opacity: 0.7 }}
+        <RagaSeal
+          swaras={janya.swarasUsed}
+          anyaSwaras={janya.anyaSwaras}
+          color={melaColorVar(janya.parentMelaNumber)}
+          size={26}
+          className="shrink-0 self-center"
         />
         <span className="display text-lg transition-colors group-hover:text-zari-hi">
-          {janya.name}
+          {janya.displayName}
         </span>
         <span className="text-xs text-ivory-mut">{janya.classificationLabel}</span>
         <span className="ml-auto">
@@ -139,7 +143,7 @@ export default function Page() {
                       href={`/raga/${parent.slug}`}
                       className="transition-colors hover:text-zari-hi"
                     >
-                      Mela {parent.melaNumber} · {parent.name}
+                      Mela {parent.melaNumber} · {parent.displayName}
                     </Link>
                   </h3>
                   <ul className="m-0 list-none p-0">

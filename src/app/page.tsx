@@ -2,6 +2,7 @@ import Link from "next/link";
 import { melaByNumber, wheelData } from "@/data";
 import { melaColorVar } from "@/lib/carnatic/color";
 import { LandingWheel } from "@/components/wheel/LandingWheel";
+import { RagaSeal } from "@/components/raga/RagaSeal";
 
 const STARTERS: { mela: number; line: string }[] = [
   { mela: 29, line: "The reference 'major' — where beginners' geetams and countless krithis live" },
@@ -91,16 +92,15 @@ export default function HomePage() {
               <li key={mela} className="border-b border-hairline">
                 <Link
                   href={`/raga/${m.slug}`}
-                  className="flex items-baseline gap-4 py-3 transition-colors hover:bg-rosewood"
+                  className="flex items-center gap-4 py-3 transition-colors hover:bg-rosewood"
                 >
-                  <span
-                    aria-hidden
-                    className="inline-block h-3 w-3 shrink-0 self-center rounded-[2px]"
-                    style={{ background: melaColorVar(mela) }}
+                  <RagaSeal
+                    swaras={m.swarasUsed}
+                    color={melaColorVar(mela)}
+                    size={36}
+                    className="shrink-0"
                   />
-                  <span className="display min-w-[11rem] text-lg text-ivory">
-                    {m.alternateNames[0] ?? m.name}
-                  </span>
+                  <span className="display min-w-[11rem] text-lg text-ivory">{m.displayName}</span>
                   <span className="text-sm text-ivory-mut">{line}</span>
                 </Link>
               </li>

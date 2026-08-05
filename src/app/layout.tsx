@@ -18,8 +18,8 @@ const anek = Anek_Latin({
 
 export const metadata: Metadata = {
   title: {
-    default: "RagaWheel — every raga has an address",
-    template: "%s · RagaWheel",
+    default: "raagawheel — every raga has an address",
+    template: "%s · raagawheel",
   },
   description:
     "The 72 melakarta ragas of Carnatic music and their janyas — hear the scales, see the swara variants, decode the names, and chase down the songs.",

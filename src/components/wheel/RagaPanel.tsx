@@ -77,18 +77,20 @@ export function RagaPanel({ data }: { data: PanelData }) {
         Mela {data.melaNumber} · {data.chakraName} · {data.melaNumber <= 36 ? "M₁" : "M₂"}
       </p>
 
-      <h2 className="display mt-2 text-[1.6rem] leading-tight text-ivory">
+      <h2 className="display mt-2 text-[1.6rem] leading-tight text-ivory">{data.displayName}</h2>
+      <p className="swara mt-1 text-sm text-ivory-mut">
+        {data.displayName !== data.name && <span className="mr-1">formally</span>}
         {rest !== null ? (
-          <>
+          <span className="display text-[0.95rem]">
             <span className="text-zari-hi">{first.syllable}</span>
-            <span aria-hidden className="text-ivory-mut">·</span>
+            <span aria-hidden>·</span>
             <span className="text-zari-hi">{second.syllable}</span>
-            {rest}
-          </>
+            <span>{rest}</span>
+          </span>
         ) : (
-          data.name
+          data.displayName !== data.name && <span className="display text-[0.95rem]">{data.name}</span>
         )}
-      </h2>
+      </p>
 
       {/* The name decodes itself */}
       <p className="swara mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ivory-mut">
@@ -111,7 +113,7 @@ export function RagaPanel({ data }: { data: PanelData }) {
         href={`/raga/${data.slug}`}
         className="mt-5 block rounded-brand border border-zari px-4 py-2 text-center text-sm text-zari-hi transition-colors hover:bg-rosewood-2"
       >
-        Open {data.name} →
+        Open {data.displayName} →
       </Link>
     </aside>
   );

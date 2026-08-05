@@ -129,7 +129,10 @@ export interface RagaCharacteristics {
 
 export interface MelaContent {
   melaNumber: number; // 1..72 — the primary key
+  /** The formal (katapayadi-bearing) sampurna-mela name. */
   name: string;
+  /** The colloquial concert name, when it differs (Sankarabharanam, Kalyani, Todi…). */
+  popularName?: string;
   alternateNames?: string[];
   slug: string;
   katapayadi: KatapayadiBreakdown;
@@ -162,7 +165,10 @@ export interface JanyaContent {
 
 interface RagaBase {
   slug: string;
+  /** Formal name (for melakartas, the katapayadi-bearing one). */
   name: string;
+  /** What people actually call it — the default everywhere in the UI. */
+  displayName: string;
   alternateNames: string[];
   arohaTokens: SwaraToken[];
   avarohaTokens: SwaraToken[];
@@ -212,6 +218,7 @@ export type Raga = MelakartaRaga | JanyaRaga;
 export interface WheelEntry {
   melaNumber: number;
   name: string;
+  displayName: string;
   slug: string;
   chakraIndex: number;
   positionInChakra: number;

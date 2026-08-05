@@ -214,6 +214,7 @@ export const melas: MelaContent[] = [
   {
     melaNumber: 29,
     name: "Dheerasankarabharanam",
+    popularName: "Sankarabharanam",
     alternateNames: ["Sankarabharanam"],
     slug: "dheerasankarabharanam",
     katapayadi: {

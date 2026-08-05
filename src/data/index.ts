@@ -31,11 +31,13 @@ export const janyaContents: JanyaContent[] = [...j1, ...j2, ...j3, ...j4, ...j5]
 function assembleMela(c: MelaContent): MelakartaRaga {
   const arohaTokens = parsePhrase(c.aroha);
   const avarohaTokens = parsePhrase(c.avaroha);
+  const displayName = c.popularName ?? c.name;
   return {
     kind: "melakarta",
     slug: c.slug,
     name: c.name,
-    alternateNames: c.alternateNames ?? [],
+    displayName,
+    alternateNames: (c.alternateNames ?? []).filter((a) => a !== displayName),
     melaNumber: c.melaNumber,
     chakra: chakraForMela(c.melaNumber),
     positionInChakra: positionInChakra(c.melaNumber),
@@ -70,6 +72,7 @@ function assembleJanya(c: JanyaContent): JanyaRaga {
     kind: "janya",
     slug: c.slug,
     name: c.name,
+    displayName: c.name,
     alternateNames: c.alternateNames ?? [],
     parentMelaNumber: c.melaNumber,
     anyaSwaras,
@@ -115,6 +118,7 @@ export const melaByNumber: ReadonlyMap<number, MelakartaRaga> = new Map(
 export const wheelData: readonly WheelEntry[] = assembledMelas.map((m) => ({
   melaNumber: m.melaNumber,
   name: m.name,
+  displayName: m.displayName,
   slug: m.slug,
   chakraIndex: m.chakra.index,
   positionInChakra: m.positionInChakra,

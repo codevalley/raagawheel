@@ -152,7 +152,7 @@ function WheelListView({
                         <span className="display w-8 text-right text-sm text-ivory-mut">
                           {e.melaNumber}
                         </span>
-                        <span className="text-ivory">{e.name}</span>
+                        <span className="text-ivory">{e.displayName}</span>
                         <Link
                           href={`/raga/${e.slug}`}
                           className="ml-auto text-xs text-zari-hi opacity-70 hover:opacity-100"

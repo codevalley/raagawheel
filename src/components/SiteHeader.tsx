@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { allRagas } from "@/data";
 import { SearchCommand, type SearchEntry } from "@/components/search/SearchCommand";
+import { WheelMark } from "@/components/icons";
 
 const NAV = [
   { href: "/melakarta", label: "Wheel" },
@@ -13,8 +14,8 @@ const NAV = [
 export function SiteHeader() {
   const searchEntries: SearchEntry[] = allRagas.map((r) => ({
     slug: r.slug,
-    name: r.name,
-    aliases: r.alternateNames,
+    name: r.displayName,
+    aliases: [...(r.displayName !== r.name ? [r.name] : []), ...r.alternateNames],
     kind: r.kind,
     melaNumber: r.kind === "melakarta" ? r.melaNumber : r.parentMelaNumber,
     chakraName: r.kind === "melakarta" ? r.chakra.name : undefined,
@@ -22,8 +23,11 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-hairline bg-night/85 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4">
-        <Link href="/" className="display text-xl tracking-tight text-ivory">
-          Raga<span className="text-zari-hi">Wheel</span>
+        <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="raagawheel home">
+          <WheelMark size={24} className="translate-y-[1px]" />
+          <span className="display text-xl lowercase tracking-tight text-ivory">
+            raaga<span className="text-zari-hi">wheel</span>
+          </span>
         </Link>
         <div className="flex min-w-0 items-center gap-3 sm:gap-5">
           <nav aria-label="Primary" className="min-w-0 overflow-x-auto">

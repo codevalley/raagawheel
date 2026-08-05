@@ -88,6 +88,7 @@ export const melas: MelaContent[] = [
   {
     melaNumber: 51,
     name: "Kamavardhani",
+    popularName: "Panthuvarali",
     alternateNames: ["Panthuvarali", "Pantuvarali", "Kasiramakriya"],
     slug: "kamavardhani",
     katapayadi: {

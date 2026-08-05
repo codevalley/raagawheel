@@ -3,6 +3,7 @@ import Link from "next/link";
 import { janyas, melaByNumber } from "@/data";
 import { melaColorVar } from "@/lib/carnatic/color";
 import { SwaraGlyph } from "@/components/swara/SwaraGlyph";
+import { RagaSeal } from "@/components/raga/RagaSeal";
 
 export const metadata: Metadata = {
   title: "Janya Ragas — the family tree",
@@ -46,7 +47,7 @@ export default function JanyaPage() {
                   style={{ background: melaColorVar(n) }}
                 />
                 <Link href={`/raga/${parent.slug}`} className="hover:text-zari-hi">
-                  {n} · {parent.name}
+                  {n} · {parent.displayName}
                 </Link>
                 <span className="text-sm font-normal text-ivory-mut">
                   {children.length} janya{children.length > 1 ? "s" : ""}
@@ -59,7 +60,14 @@ export default function JanyaPage() {
                       href={`/raga/${j.slug}`}
                       className="flex flex-wrap items-baseline gap-x-4 gap-y-1 py-2.5 transition-colors hover:bg-rosewood"
                     >
-                      <span className="display min-w-[10rem] text-ivory">{j.name}</span>
+                      <RagaSeal
+                        swaras={j.swarasUsed}
+                        anyaSwaras={j.anyaSwaras}
+                        color={melaColorVar(n)}
+                        size={24}
+                        className="shrink-0 self-center"
+                      />
+                      <span className="display min-w-[10rem] text-ivory">{j.displayName}</span>
                       <span className="swara flex flex-wrap gap-x-2 text-sm text-ivory-mut">
                         {j.arohaTokens.map((t, i) => (
                           <SwaraGlyph key={i} token={t} />

@@ -86,7 +86,7 @@ export function RagaWheel({
           <>
             <span className="text-zari-hi">{activeEntry.melaNumber}</span>
             {" · "}
-            <span className="text-ivory">{activeEntry.name}</span>
+            <span className="text-ivory">{activeEntry.displayName}</span>
             {" · "}
             {CHAKRAS[activeEntry.chakraIndex - 1].name}
             {" · "}
@@ -135,7 +135,7 @@ export function RagaWheel({
               id={`mela-${n}`}
               role="option"
               aria-selected={isSelected}
-              aria-label={`Mela ${n}, ${e.name}. ${CHAKRAS[e.chakraIndex - 1].name} chakra, ${n <= 36 ? "suddha" : "prati"} madhyama.`}
+              aria-label={`Mela ${n}, ${e.displayName}. ${CHAKRAS[e.chakraIndex - 1].name} chakra, ${n <= 36 ? "suddha" : "prati"} madhyama.`}
               style={{
                 transform: `translate(${bx * pull}px, ${by * pull}px)`,
                 transition: "transform 150ms ease-out",
@@ -224,7 +224,7 @@ export function RagaWheel({
                 onMouseLeave={() => setHovered(null)}
                 aria-hidden
               >
-                {e.name}
+                {e.displayName}
               </text>
             );
           })}

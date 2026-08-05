@@ -19,6 +19,8 @@ import {
 } from "@/lib/carnatic/links";
 import { SwaraGlyph } from "@/components/swara/SwaraGlyph";
 import { RagaSoundSection } from "@/components/raga/RagaSoundSection";
+import { RagaSeal } from "@/components/raga/RagaSeal";
+import { MoonIcon, SpotifyIcon, SunIcon, YouTubeIcon } from "@/components/icons";
 
 export const dynamicParams = false;
 
@@ -38,7 +40,7 @@ export async function generateMetadata({
     raga.kind === "melakarta"
       ? `Melakarta ${raga.melaNumber} (${raga.chakra.name} chakra) — arohana ${raga.arohaString}, avarohana ${raga.avarohaString}.`
       : `Janya of mela ${raga.parentMelaNumber} — arohana ${raga.arohaString}, avarohana ${raga.avarohaString}.`;
-  return { title: raga.name, description };
+  return { title: raga.displayName, description };
 }
 
 // ── Small presentational helpers (server-safe) ──────────────────────────
@@ -105,7 +107,7 @@ function JanyaEyebrow({ raga }: { raga: JanyaRaga }) {
               color: melaInk(raga.parentMelaNumber),
             }}
           >
-            {parent.name}
+            {parent.displayName}
           </Link>
         </>
       )}
@@ -238,7 +240,16 @@ function Characteristics({ raga, accent }: { raga: Raga; accent: string }) {
             ))}
           </div>
         )}
-        {prose && <p className="max-w-prose">{prose}</p>}
+        {prose && (
+          <p className="max-w-prose">
+            {c.timeOfDay && c.timeOfDay !== "anytime" && (
+              <span className="mr-2 inline-flex text-zari" aria-hidden>
+                {c.timeOfDay === "evening" || c.timeOfDay === "night" ? <MoonIcon /> : <SunIcon />}
+              </span>
+            )}
+            {prose}
+          </p>
+        )}
         {c.gamakaNotes && <p className="max-w-prose text-sm text-ivory-mut">{c.gamakaNotes}</p>}
         {isJanya && raga.anyaSwaras.length > 0 && (
           <div className="flex flex-wrap items-center gap-2">
@@ -264,6 +275,7 @@ function Characteristics({ raga, accent }: { raga: Raga; accent: string }) {
 // ── Songs ledger ────────────────────────────────────────────────────────
 
 function SongRow({ song, ragaName }: { song: Song; ragaName: string }) {
+  // The colloquial name searches far better ("Sankarabharanam", not "Dheera…").
   const query = songSearchQuery(song, ragaName);
   const detail =
     song.type === "film" && song.film
@@ -276,22 +288,24 @@ function SongRow({ song, ragaName }: { song: Song; ragaName: string }) {
         <p className="text-sm text-ivory-mut">{detail}</p>
         {song.trivia && <p className="mt-1 max-w-prose text-sm text-ivory-mut">{song.trivia}</p>}
       </div>
-      <p className="flex shrink-0 gap-4 text-sm">
+      <p className="flex shrink-0 items-center gap-4 text-sm">
         <a
           href={youtubeSearchUrl(query)}
           target="_blank"
           rel="noopener"
-          className="text-zari transition-colors hover:text-zari-hi"
+          aria-label={`Search YouTube for ${song.title}`}
+          className="flex items-center gap-1.5 text-ivory-mut transition-colors hover:text-[#FF0033]"
         >
-          YouTube ↗
+          <YouTubeIcon /> YouTube
         </a>
         <a
           href={spotifySearchUrl(query)}
           target="_blank"
           rel="noopener"
-          className="text-zari transition-colors hover:text-zari-hi"
+          aria-label={`Search Spotify for ${song.title}`}
+          className="flex items-center gap-1.5 text-ivory-mut transition-colors hover:text-[#1ED760]"
         >
-          Spotify ↗
+          <SpotifyIcon /> Spotify
         </a>
       </p>
     </li>
@@ -308,7 +322,7 @@ function Songs({ raga }: { raga: Raga }) {
       {classical.length > 0 && (
         <ul className="m-0 list-none p-0">
           {classical.map((s, i) => (
-            <SongRow key={`${s.title}-${i}`} song={s} ragaName={raga.name} />
+            <SongRow key={`${s.title}-${i}`} song={s} ragaName={raga.displayName} />
           ))}
         </ul>
       )}
@@ -317,7 +331,7 @@ function Songs({ raga }: { raga: Raga }) {
           <p className="eyebrow mb-2 text-ivory-mut">In film music</p>
           <ul className="m-0 list-none p-0">
             {film.map((s, i) => (
-              <SongRow key={`${s.title}-${i}`} song={s} ragaName={raga.name} />
+              <SongRow key={`${s.title}-${i}`} song={s} ragaName={raga.displayName} />
             ))}
           </ul>
         </div>
@@ -331,13 +345,21 @@ function Songs({ raga }: { raga: Raga }) {
 function RagaLinkRow({ slug }: { slug: string }) {
   const r = ragaBySlug.get(slug);
   if (!r) return null;
+  const familyMela = r.kind === "melakarta" ? r.melaNumber : r.parentMelaNumber;
   return (
     <li>
       <Link
         href={`/raga/${r.slug}`}
-        className="flex items-baseline gap-3 rounded-brand border border-hairline bg-rosewood px-3 py-2 transition-colors hover:border-hairline-strong"
+        className="flex items-center gap-3 rounded-brand border border-hairline bg-rosewood px-3 py-2 transition-colors hover:border-hairline-strong"
       >
-        <span className="display">{r.name}</span>
+        <RagaSeal
+          swaras={r.swarasUsed}
+          anyaSwaras={r.kind === "janya" ? r.anyaSwaras : []}
+          color={melaColorVar(familyMela)}
+          size={30}
+          className="shrink-0"
+        />
+        <span className="display">{r.displayName}</span>
         {r.kind === "janya" && (
           <span className="text-xs text-ivory-mut">{r.classificationLabel}</span>
         )}
@@ -351,7 +373,7 @@ function Family({ raga }: { raga: Raga }) {
     if (raga.janyaSlugs.length === 0) return null;
     return (
       <section aria-label="Janya ragas">
-        <SectionTitle>Janyas of {raga.name}</SectionTitle>
+        <SectionTitle>Janyas of {raga.displayName}</SectionTitle>
         <ul className="m-0 flex list-none flex-col gap-2 p-0">
           {raga.janyaSlugs.map((slug) => (
             <RagaLinkRow key={slug} slug={slug} />
@@ -377,11 +399,11 @@ function Family({ raga }: { raga: Raga }) {
           style={{ background: melaColorVar(parent.melaNumber) }}
         />
         <span className="eyebrow">Parent · Mela {parent.melaNumber}</span>
-        <span className="display text-lg">{parent.name}</span>
+        <span className="display text-lg">{parent.displayName}</span>
       </Link>
       {siblings.length > 0 && (
         <div className="mt-4">
-          <p className="mb-2 text-sm text-ivory-mut">Sibling janyas of {parent.name}</p>
+          <p className="mb-2 text-sm text-ivory-mut">Sibling janyas of {parent.displayName}</p>
           <ul className="m-0 flex list-none flex-col gap-2 p-0">
             {siblings.map((slug) => (
               <RagaLinkRow key={slug} slug={slug} />
@@ -409,7 +431,7 @@ function FooterNav({ raga }: { raga: Raga }) {
               href={`/raga/${prev.slug}`}
               className="text-ivory-mut transition-colors hover:text-ivory"
             >
-              ← {prev.melaNumber} · {prev.name}
+              ← {prev.melaNumber} · {prev.displayName}
             </Link>
           )}
           {next && (
@@ -417,7 +439,7 @@ function FooterNav({ raga }: { raga: Raga }) {
               href={`/raga/${next.slug}`}
               className="order-last text-ivory-mut transition-colors hover:text-ivory sm:order-none"
             >
-              {next.melaNumber} · {next.name} →
+              {next.melaNumber} · {next.displayName} →
             </Link>
           )}
         </div>
@@ -427,7 +449,7 @@ function FooterNav({ raga }: { raga: Raga }) {
               href={`/raga/${partner.slug}`}
               className="text-zari transition-colors hover:text-zari-hi"
             >
-              Madhyama partner: {partner.melaNumber} · {partner.name}
+              Madhyama partner: {partner.melaNumber} · {partner.displayName}
             </Link>
           )}
           <Link
@@ -468,7 +490,7 @@ function FooterNav({ raga }: { raga: Raga }) {
       {parent && (
         <div className="mt-4 text-sm">
           <Link href={`/raga/${parent.slug}`} className="text-zari transition-colors hover:text-zari-hi">
-            Parent mela: {parent.melaNumber} · {parent.name}
+            Parent mela: {parent.melaNumber} · {parent.displayName}
           </Link>
         </div>
       )}
@@ -492,20 +514,46 @@ export default async function Page({
 
   return (
     <article className="mx-auto flex max-w-3xl flex-col gap-12 px-4 py-12">
-      <header>
-        {raga.kind === "melakarta" ? (
-          <MelaEyebrow raga={raga} />
-        ) : (
-          <JanyaEyebrow raga={raga} />
-        )}
-        <h1 className="display mt-3 leading-tight" style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)" }}>
-          {raga.name}
-        </h1>
-        {raga.alternateNames.length > 0 && (
-          <p className="mt-1 text-sm text-ivory-mut">
-            also known as {raga.alternateNames.join(", ")}
-          </p>
-        )}
+      <header className="relative">
+        {/* A quiet wash of the raga's own family color behind the title. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-x-8 -top-10 h-56"
+          style={{
+            background: `radial-gradient(ellipse 70% 100% at 30% 0%, color-mix(in oklab, ${accent} 16%, transparent), transparent 70%)`,
+          }}
+        />
+        <div className="relative flex items-start justify-between gap-6">
+          <div>
+            {raga.kind === "melakarta" ? (
+              <MelaEyebrow raga={raga} />
+            ) : (
+              <JanyaEyebrow raga={raga} />
+            )}
+            <h1 className="display mt-3 leading-tight" style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)" }}>
+              {raga.displayName}
+            </h1>
+            {raga.displayName !== raga.name && (
+              <p className="mt-1.5 text-[0.95rem] text-ivory-mut">
+                formally <span className="display text-ivory">{raga.name}</span> — the name that
+                encodes {raga.kind === "melakarta" ? raga.melaNumber : ""}
+              </p>
+            )}
+            {raga.alternateNames.length > 0 && (
+              <p className="mt-1 text-sm text-ivory-mut">
+                also known as {raga.alternateNames.join(", ")}
+              </p>
+            )}
+          </div>
+          <RagaSeal
+            swaras={raga.swarasUsed}
+            anyaSwaras={raga.kind === "janya" ? raga.anyaSwaras : []}
+            color={accent}
+            size={104}
+            className="mt-2 hidden shrink-0 sm:block"
+            title={`${raga.displayName}: ${raga.swarasUsed.length} swaras on the twelve-key ring`}
+          />
+        </div>
       </header>
 
       {raga.kind === "melakarta" && <KatapayadiDecode raga={raga} />}

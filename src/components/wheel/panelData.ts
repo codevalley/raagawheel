@@ -7,6 +7,7 @@ import type { KatapayadiBreakdown, MelakartaRaga, Swarasthana } from "@/lib/carn
 export interface PanelData {
   melaNumber: number;
   name: string;
+  displayName: string;
   slug: string;
   chakraName: string;
   katapayadi: KatapayadiBreakdown;
@@ -19,6 +20,7 @@ export function toPanelData(m: MelakartaRaga): PanelData {
   return {
     melaNumber: m.melaNumber,
     name: m.name,
+    displayName: m.displayName,
     slug: m.slug,
     chakraName: m.chakra.name,
     katapayadi: m.katapayadi,
