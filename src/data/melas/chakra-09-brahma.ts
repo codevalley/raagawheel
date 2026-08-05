@@ -115,6 +115,7 @@ export const melas: MelaContent[] = [
         type: "krithi",
         composer: "Tyagaraja",
         language: "Telugu",
+        tala: "Rupaka",
       },
       {
         title: "Ramanatham Bhajeham",
@@ -174,10 +175,11 @@ export const melas: MelaContent[] = [
     },
     songs: [
       {
-        title: "Sandehamunu Dirpavayya",
+        title: "Sandehamunu Tirpumayya",
         type: "krithi",
         composer: "Tyagaraja",
         language: "Telugu",
+        tala: "Adi",
         trivia: "Tyagaraja is credited with pioneering concert use of Ramapriya.",
       },
       {

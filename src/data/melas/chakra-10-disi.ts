@@ -68,6 +68,7 @@ export const melas: MelaContent[] = [
         type: "krithi",
         composer: "Muthuswami Dikshitar",
         language: "Sanskrit",
+        tala: "Rupaka",
         trivia:
           "Composed in Chamaram, the Dikshitar-school asampurna name for mela 56; one of Dikshitar's best-known Ganesha krithis.",
       },
@@ -76,6 +77,7 @@ export const melas: MelaContent[] = [
         type: "krithi",
         composer: "Papanasam Sivan",
         language: "Tamil",
+        tala: "Adi",
         trivia: "On Muruga — 'Shanmukha' (six-faced) is Muruga himself, making the mela's name doubly apt.",
       },
       {
@@ -160,6 +162,7 @@ export const melas: MelaContent[] = [
         type: "krithi",
         composer: "Swati Tirunal",
         language: "Sanskrit",
+        tala: "Adi",
       },
       {
         title: "Unnaiyallal",
@@ -247,14 +250,6 @@ export const melas: MelaContent[] = [
         tala: "Rupaka",
         trivia:
           "Composed in Dhamavati, the Dikshitar-school asampurna name for mela 59.",
-      },
-      {
-        title: "Meghame Meghame",
-        type: "film",
-        composer: "Shankar–Ganesh",
-        language: "Tamil",
-        film: { name: "Palaivana Solai", year: 1981 },
-        notableRenditions: "S. Janaki's rendition is regarded as one of her finest film recordings.",
       },
     ],
     trivia: [
