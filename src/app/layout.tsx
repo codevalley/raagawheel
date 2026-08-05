@@ -17,12 +17,21 @@ const anek = Anek_Latin({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://raagawheel.com"),
   title: {
     default: "raagawheel — every raga has an address",
     template: "%s · raagawheel",
   },
   description:
     "The 72 melakarta ragas of Carnatic music and their janyas — hear the scales, see the swara variants, decode the names, and chase down the songs.",
+  openGraph: {
+    siteName: "raagawheel",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

@@ -7,6 +7,17 @@
 
 export const FAMILY_NAMES = ["lac", "kumkum", "turmeric", "leaf", "peacock", "indigo"] as const;
 
+/**
+ * Hex anchors of the six families (≈ the s3 step of the OKLCH ramps).
+ * For contexts that can't resolve CSS variables or oklch() — OG image
+ * generation (Satori), meta theme-color, external embeds.
+ */
+export const FAMILY_HEX = ["#96434f", "#9c5028", "#8b6d1f", "#4c7345", "#2f6f75", "#575c94"] as const;
+
+export function melaFamilyHex(n: number): string {
+  return FAMILY_HEX[familyOfMela(n) - 1];
+}
+
 /** 1..6 — which R/G family a mela belongs to (same for n and n+36). */
 export function familyOfMela(n: number): number {
   const idx = n <= 36 ? n - 1 : n - 37;

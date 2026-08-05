@@ -88,5 +88,4 @@ valuable contributions and need no coding — see [CONTRIBUTING.md](CONTRIBUTING
 
 ## License
 
-[MIT](LICENSE) — built with love for Carnatic music, with development assistance from
-[Claude Code](https://claude.com/claude-code).
+[MIT](LICENSE) — built with love for Carnatic music, with blessing from the forefathers. 
