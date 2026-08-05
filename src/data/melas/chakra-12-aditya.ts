@@ -267,14 +267,14 @@ export const melas: MelaContent[] = [
           "Composed under the asampurna mela name Rasamanjari, the Dikshitar-school equivalent of Rasikapriya — the raga mudra opens the kriti.",
       },
       {
-        title: "Om Sivoham",
+        title: "Kannil Paarvai",
         type: "film",
         composer: "Ilaiyaraaja",
         language: "Tamil",
         film: { name: "Naan Kadavul", year: 2009 },
-        notableRenditions: "Sung by Vijay Prakash.",
+        notableRenditions: "Sung by Shreya Ghoshal.",
         trivia:
-          "Ilaiyaraaja reached for the 72nd and fiercest melakarta to score an Aghori ascetic's anthem.",
+          "Ilaiyaraaja reached for the 72nd and fiercest melakarta for this haunting song picturised on blind beggars.",
       },
     ],
     trivia: [

@@ -135,13 +135,6 @@ export const melas: MelaContent[] = [
         notableRenditions: "Sung by Kishore Kumar.",
         trivia: "A classic example of Hindustani Kirwani in Hindi film music.",
       },
-      {
-        title: "Thendral Vandhu Ennai Thodum",
-        type: "film",
-        composer: "Ilaiyaraaja",
-        language: "Tamil",
-        film: { name: "Avatharam", year: 1995 },
-      },
     ],
     trivia: [
       {

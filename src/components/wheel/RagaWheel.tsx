@@ -35,6 +35,7 @@ export function RagaWheel({
   const player = useRagaPlayer();
   const [hovered, setHovered] = useState<number | null>(null);
   const [focusIdx, setFocusIdx] = useState<number>(selected ?? 29);
+  const [hasFocus, setHasFocus] = useState(false);
   const listboxRef = useRef<SVGSVGElement>(null);
   const byNumber = new Map(entries.map((e) => [e.melaNumber, e]));
 
@@ -105,15 +106,17 @@ export function RagaWheel({
         aria-activedescendant={`mela-${focusIdx}`}
         tabIndex={0}
         onKeyDown={onKeyDown}
+        onFocus={() => setHasFocus(true)}
+        onBlur={() => setHasFocus(false)}
       >
         {/* Madhyama axis + outer rim */}
         <line x1={CX} y1={10} x2={CX} y2={710} stroke="var(--hairline)" strokeDasharray="2 6" />
         <circle cx={CX} cy={CY} r={R.labelInner - 4} fill="none" stroke="var(--hairline)" />
-        <text x={706} y={CY + 4} textAnchor="end" fill="var(--ivory-mut)" fontSize={13}>
-          M₁ · 1–36
+        <text x={CX + 10} y={18} fill="var(--ivory-mut)" fontSize={13}>
+          M₁ · 1–36 →
         </text>
-        <text x={14} y={CY + 4} fill="var(--ivory-mut)" fontSize={13}>
-          M₂ · 37–72
+        <text x={CX - 10} y={18} textAnchor="end" fill="var(--ivory-mut)" fontSize={13}>
+          ← M₂ · 37–72
         </text>
 
         {/* 72 mela wedges */}
@@ -123,7 +126,7 @@ export function RagaWheel({
           const a1 = n * 5;
           const isSelected = selected === n;
           const isHovered = hovered === n;
-          const isFocused = focusIdx === n;
+          const isFocused = hasFocus && focusIdx === n;
           const [bx, by] = bisector(n);
           const pull = isSelected ? 8 : isHovered ? 4 : 0;
           return (
@@ -182,11 +185,11 @@ export function RagaWheel({
                 stroke="var(--night)"
                 strokeWidth={1.1}
               />
-              <path id={`chakra-arc-${i}`} d={arcPath(flip ? 112 : 128, b0 + 2, b1 - 2, flip)} fill="none" />
+              <path id={`chakra-arc-${i}`} d={arcPath(flip ? 116 : 124, b0, b1, flip)} fill="none" />
               <text
                 fill="var(--zari)"
-                fontSize={13.5}
-                letterSpacing="0.12em"
+                fontSize={12.5}
+                letterSpacing="0.08em"
                 fontWeight={600}
               >
                 <textPath href={`#chakra-arc-${i}`} startOffset="50%" textAnchor="middle">

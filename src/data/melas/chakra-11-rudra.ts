@@ -147,8 +147,9 @@ export const melas: MelaContent[] = [
         composer: "A. R. Rahman",
         language: "Tamil",
         film: { name: "Kandukondain Kandukondain", year: 2000 },
-        notableRenditions: "Sung by K. S. Chithra.",
-        trivia: "A rare mainstream film outing for a heavy classical prati-madhyama mela.",
+        notableRenditions: "Sung by K. S. Chithra and Srinivas.",
+        trivia:
+          "A rare mainstream film outing for a heavy classical prati-madhyama mela — the charanam in particular settles squarely into Latangi.",
       },
     ],
     trivia: [
@@ -245,8 +246,6 @@ export const melas: MelaContent[] = [
     aroha: "S R2 G3 M2 P D2 N3 S'",
     avaroha: "S' N3 D2 P M2 G3 R2 S",
     characteristics: {
-      jeevaSwaras: ["G3", "N3"],
-      timeOfDay: "evening",
       mood: "Auspicious and regal — the quintessential raga of weddings, festivity and grand concert openings.",
     },
     songs: [
@@ -273,7 +272,7 @@ export const melas: MelaContent[] = [
         composer: "Muthuswami Dikshitar",
         language: "Sanskrit",
         tala: "Adi",
-        trivia: "The third avarana of Dikshitar's Kamalamba Navavarana cycle on the Sri Chakra.",
+        trivia: "The second avarana of Dikshitar's Kamalamba Navavarana cycle on the Sri Chakra.",
       },
       {
         title: "Himadri Sute",

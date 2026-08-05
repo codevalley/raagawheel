@@ -23,7 +23,7 @@ export function melaColorVar(n: number): string {
   return `var(--mela-f${familyOfMela(n)}-s${stepOfMela(n)})`;
 }
 
-/** Ink that stays legible on the mela color: dark on light steps 5–6. */
+/** Ink that stays legible on the mela color: dark only on the lightest step. */
 export function melaInk(n: number): string {
-  return stepOfMela(n) >= 5 ? "var(--night)" : "var(--ivory)";
+  return stepOfMela(n) >= 6 ? "var(--night)" : "var(--ivory)";
 }

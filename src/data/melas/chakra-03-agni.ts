@@ -30,7 +30,6 @@ export const melas: MelaContent[] = [
         type: "krithi",
         composer: "Koteeswara Iyer",
         language: "Tamil",
-        tala: "Jhampa",
         trivia:
           "From Kanda Ganamutham, Koteeswara Iyer's cycle of Tamil krithis on Muruga covering all 72 melakartas.",
       },

@@ -11,10 +11,18 @@ export const R = {
   hub: 88,
 } as const;
 
+/**
+ * Round to 3 decimals (sub-pixel at viewBox scale). Math.sin/cos are not
+ * required to be bit-identical across V8 builds, so unrounded coordinates
+ * differ between Node (SSR) and the browser in the last decimal — enough
+ * to trigger React hydration-mismatch warnings on every wedge.
+ */
+const round3 = (x: number): number => Math.round(x * 1000) / 1000;
+
 /** Angle 0 = 12 o'clock, increasing clockwise (mela 1 starts at the top). */
 export function polar(r: number, deg: number): [number, number] {
   const a = ((deg - 90) * Math.PI) / 180;
-  return [CX + r * Math.cos(a), CY + r * Math.sin(a)];
+  return [round3(CX + r * Math.cos(a)), round3(CY + r * Math.sin(a))];
 }
 
 export function wedgePath(rIn: number, rOut: number, a0: number, a1: number): string {
