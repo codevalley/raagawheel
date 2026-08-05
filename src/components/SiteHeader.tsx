@@ -25,9 +25,9 @@ export function SiteHeader() {
         <Link href="/" className="display text-xl tracking-tight text-ivory">
           Raga<span className="text-zari-hi">Wheel</span>
         </Link>
-        <div className="flex items-center gap-3 sm:gap-5">
-          <nav aria-label="Primary">
-            <ul className="flex items-center gap-3 text-sm text-ivory-mut sm:gap-5">
+        <div className="flex min-w-0 items-center gap-3 sm:gap-5">
+          <nav aria-label="Primary" className="min-w-0 overflow-x-auto">
+            <ul className="flex items-center gap-3 whitespace-nowrap text-sm text-ivory-mut sm:gap-5">
               {NAV.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="transition-colors hover:text-ivory">

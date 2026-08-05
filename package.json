@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run",
-    "validate": "vitest run"
+    "test": "CONTENT_COMPLETE=1 vitest run",
+    "validate": "CONTENT_COMPLETE=1 vitest run"
   },
   "dependencies": {
     "next": "16.2.12",

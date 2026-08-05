@@ -266,9 +266,13 @@ export const janyas: JanyaContent[] = [
     name: "Devagandhari",
     slug: "devagandhari",
     melaNumber: 29,
-    // Same skeleton as Arabhi — Wikipedia: Devagandhari; karnatik.com.
+    // Arabhi's skeleton plus a vakra kaisiki-nishadam turn in the descent —
+    // Wikipedia: Devagandhari (avarohanam S' N3 D2 N2 D2 P M1 G3 R2 S).
     aroha: "S R2 M1 P D2 S'",
-    avaroha: "S' N3 D2 P M1 G3 R2 S",
+    avaroha: "S' N3 D2 N2 D2 P M1 G3 R2 S",
+    anyaSwaras: ["N2"],
+    anyaSwaraNote:
+      "Kaisiki nishadam (N2) enters through the vakra descent phrase N3 D2 N2 D2 P, making Devagandhari a bhashanga raga; some sources list the plainer avaroha S' N3 D2 P M1 G3 R2 S and treat N2 as prayoga-only.",
     characteristics: {
       mood: "Slow, dignified and drenched in gamaka — where Arabhi strides, Devagandhari lingers and pleads.",
     },
@@ -299,7 +303,7 @@ export const janyas: JanyaContent[] = [
     ],
     trivia: [
       {
-        text: "Devagandhari's scale is note-for-note Arabhi's; the two are the textbook example of ragas separated purely by chalana — gait, tempo and gamaka.",
+        text: "Devagandhari shares Arabhi's skeleton and the two are the textbook example of ragas separated by chalana — gait, tempo and gamaka — though Devagandhari additionally admits a kaisiki nishadam in descent that Arabhi never takes.",
         source: "Wikipedia: Devagandhari",
       },
       {
@@ -329,14 +333,6 @@ export const janyas: JanyaContent[] = [
         tala: "Misra Eka",
         trivia:
           "From Dikshitar's Shodasha Ganapati set; notated in misra eka but usually rendered in misra chapu, and long treasured as a Veena Dhanammal-family heirloom.",
-      },
-      {
-        title: "Dhanyayayi",
-        type: "padam",
-        composer: "Swati Tirunal",
-        language: "Malayalam",
-        tala: "Jhampa",
-        searchQueryOverride: "Dhanyayayi Navaroj Swati Tirunal padam",
       },
     ],
     trivia: [
@@ -472,15 +468,6 @@ export const janyas: JanyaContent[] = [
         composer: "Oothukkadu Venkata Kavi",
         language: "Sanskrit",
         searchQueryOverride: "Kalyana Rama Hamsanadam Oothukkadu",
-      },
-      {
-        title: "Ullathil Nalla Ullam",
-        type: "film",
-        composer: "Viswanathan–Ramamoorthy",
-        language: "Tamil",
-        film: { name: "Karnan", year: 1964 },
-        trivia:
-          "Sung by Seerkazhi Govindarajan for Sivaji Ganesan's Karnan — the classic film outing of Hamsanadam.",
       },
     ],
     trivia: [

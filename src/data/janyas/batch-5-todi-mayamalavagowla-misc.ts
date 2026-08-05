@@ -64,7 +64,7 @@ export const janyas: JanyaContent[] = [
         type: "krithi",
         composer: "Thyagaraja",
         language: "Telugu",
-        tala: "Adi",
+        tala: "Rupakam",
       },
       {
         title: "Balagopala",
@@ -127,16 +127,6 @@ export const janyas: JanyaContent[] = [
         tala: "Rupakam",
         trivia:
           "On Siva as Tyagaraja of Tiruvarur; famed for its gopuccha/srotovaha yati sahitya that grows and shrinks syllable by syllable.",
-      },
-      {
-        title: "Kannalane",
-        type: "film",
-        composer: "A. R. Rahman",
-        language: "Tamil",
-        film: { name: "Bombay", year: 1995 },
-        trivia:
-          "Rahman's melody (Kehna Hi Kya in Hindi) is widely cited as built on Anandabhairavi.",
-        searchQueryOverride: "Kannalane Bombay Anandabhairavi",
       },
     ],
     trivia: [
@@ -210,13 +200,6 @@ export const janyas: JanyaContent[] = [
       mood: "Grave and inward — a raga of lament and quiet devotion, common in padams and temple singing.",
     },
     songs: [
-      {
-        title: "Deva Deva Kalayami Te",
-        type: "krithi",
-        composer: "Swati Tirunal",
-        language: "Sanskrit",
-        tala: "Rupakam",
-      },
       {
         title: "Bhajasva Sri Tripurasundari",
         type: "krithi",
@@ -303,7 +286,7 @@ export const janyas: JanyaContent[] = [
         type: "devotional",
         composer: "Purandara Dasa",
         language: "Kannada",
-        tala: "Triputa",
+        tala: "Rupakam",
         trivia: "Another of the Malahari pillari geethams on Siva.",
         searchQueryOverride: "Kunda Gaura geetham Malahari",
       },

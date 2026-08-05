@@ -15,13 +15,18 @@ import { melas as c10 } from "./melas/chakra-10-disi";
 import { melas as c11 } from "./melas/chakra-11-rudra";
 import { melas as c12 } from "./melas/chakra-12-aditya";
 
+import { janyas as j1 } from "./janyas/batch-1-pentatonics";
+import { janyas as j2 } from "./janyas/batch-2-kharaharapriya-family";
+import { janyas as j3 } from "./janyas/batch-3-sankarabharanam-family";
+import { janyas as j4 } from "./janyas/batch-4-harikambhoji-family";
+import { janyas as j5 } from "./janyas/batch-5-todi-mayamalavagowla-misc";
+
 export const melaContents: MelaContent[] = [
   ...c01, ...c02, ...c03, ...c04, ...c05, ...c06,
   ...c07, ...c08, ...c09, ...c10, ...c11, ...c12,
 ];
 
-/** Janya batches land in the content wave; assembly already supports them. */
-export const janyaContents: JanyaContent[] = [];
+export const janyaContents: JanyaContent[] = [...j1, ...j2, ...j3, ...j4, ...j5];
 
 function assembleMela(c: MelaContent): MelakartaRaga {
   const arohaTokens = parsePhrase(c.aroha);

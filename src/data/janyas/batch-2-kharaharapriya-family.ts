@@ -44,17 +44,6 @@ export const janyas: JanyaContent[] = [
         language: "Sanskrit",
         tala: "Adi",
       },
-      {
-        title: "En Iniya Pon Nilave",
-        type: "film",
-        composer: "Ilaiyaraaja",
-        language: "Tamil",
-        film: { name: "Moodu Pani", year: 1980 },
-        notableRenditions: "K. J. Yesudas",
-        trivia:
-          "A staple of raga-based film-song lists under Abheri/Bhimplas, famous for its long guitar prelude.",
-        searchQueryOverride: "En Iniya Pon Nilave Moodu Pani Yesudas",
-      },
     ],
     trivia: [
       {
@@ -268,16 +257,6 @@ export const janyas: JanyaContent[] = [
         type: "krithi",
         composer: "Papanasam Sivan",
         language: "Tamil",
-      },
-      {
-        title: "Chinna Chinna Vanna Kuyil",
-        type: "film",
-        composer: "Ilaiyaraaja",
-        language: "Tamil",
-        film: { name: "Mouna Ragam", year: 1986 },
-        notableRenditions: "S. Janaki",
-        trivia:
-          "Widely cited in raga-based film-song lists as an example of Reetigowla's film afterlife.",
       },
     ],
     trivia: [
@@ -536,16 +515,6 @@ export const janyas: JanyaContent[] = [
         type: "krithi",
         composer: "Muthuswami Dikshitar",
         language: "Sanskrit",
-      },
-      {
-        title: "Rasathi Unna",
-        type: "film",
-        composer: "Ilaiyaraaja",
-        language: "Tamil",
-        film: { name: "Vaidehi Kathirunthal", year: 1984 },
-        trivia:
-          "Regularly cited in raga-based film-song lists as Ilaiyaraaja's homage to Huseni.",
-        searchQueryOverride: "Rasathi Unna Vaidehi Kathirunthal",
       },
     ],
     trivia: [
